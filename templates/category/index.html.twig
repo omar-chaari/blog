@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des categories{% endblock %}
+
+{% block body %}
+
+<center><h5>Ajouter une categorie</h5></center>
+
+{{ form_start(form) }} 
+<div class="form-group">
+{{ form_row(form.description)}}
+</div>
+
+<div class="form-group">
+
+
+<button type="submit" class="btn btn-primary" name="enregistrer">
+Enregister  !
+</button>
+
+</div>
+{{ form_end(form) }}
+
+
+
+
+<center><h5>Liste des categories</h5></center>
+
+{% for message in app.flashes('success') %}
+    <div class="alert alert-success" role="alert">
+        {{ message }}
+    </div>
+{% endfor %}
+
+{% if category|length==0 %}
+<div class="alert alert-secondary" role="alert" style="margin-top:15px">
+  Vous n'avez ajouté aucune categorie!
+</div>
+{% else %}
+
+
+<table class="table table-bordered table-striped">
+<tr>
+<th>
+#Id
+</th>
+<th>
+Description
+</th>
+
+
+<th>
+Actions
+</th>
+
+</tr>
+
+{% for item in category %}
+<tr>
+
+<td> {{ item.getID() }} </td>
+<td> {{ item.getDescription() }} </td>
+<td>
+{#<a class="" href="{{ path('category-show', {'id':item.getId() }) }}"><i class="fas fa-eye"></i></a> 
+#}
+<a class="" href="{{ path('category-edit', {'id':item.getId() }) }}"><i class="fas fa-edit"></i></a> 
+ 
+
+<a class="" href="{{ path('category-delete', {'id':item.getId() }) }}"><i class="fas fa-trash-alt"></i></a>
+</td>
+</tr>
+{% endfor %}
+</table>
+{% endif %}
+
+{% endblock %}

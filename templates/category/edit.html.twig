@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier une categorie{% endblock %}
+
+{% block body %}
+
+<center><h5>Modifier une categorie</h5></center>
+
+{{ form_start(form) }} 
+<div class="form-group">
+{{ form_row(form.description)}}
+</div>
+
+<div class="form-group">
+
+
+<button type="submit" class="btn btn-primary" name="enregistrer">
+Enregister  !
+</button>
+
+</div>
+{{ form_end(form) }}
+
+
+
+
+
+
+{% endblock %}

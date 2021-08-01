@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des articles{% endblock %}
+
+{% block body %}
+<center><h5>Liste des articles</h5></center>
+
+{% for message in app.flashes('success') %}
+    <div class="alert alert-success" role="alert">
+        {{ message }}
+    </div>
+{% endfor %}
+
+<!--
+<div class="count">
+    {{ article.getTotalItemCount }}
+</div>
+-->
+ <a class="btn btn-primary btn-sm" href="{{ path('blog-add') }}">Ajouter un article</a>
+
+{% if(article.getTotalItemCount==0) %}
+<div class="alert alert-secondary" role="alert" style="margin-top:15px">
+  Vous n'avez ajouté aucun article!
+</div>
+{% else %}
+
+<table class="table table-bordered table-striped" style="margin-top:15px">
+<tr>
+<th>
+#Id
+</th>
+<th>
+Titre
+</th>
+<th>
+Date publication
+</th>
+<th>
+Publié
+</th>
+<th>
+Image
+</th>
+<th>
+Contenu
+</th>
+
+
+
+<th style="width: 110px;">
+Actions
+</th>
+
+</tr>
+
+{% for item in article %}
+<tr>
+
+<td> {{ item.getID() }} </td>
+<td> {{ item.getTitle() }} </td>
+<td> {{ item.getDatePub()|date('d/M/Y') }} </td>
+<td>
+{% if (item.getIsPublished()) %} <span class="badge bg-success">Oui</span> {% else %}
+<span class="badge bg-danger">Non</span> {% endif %} 
+  </td>
+<td><img src={{asset('uploads/images/')}}{{item.getImage()}} width="40px" height="40px"/></td>
+
+<td> {{ item.getContent() |slice(0, 50)}}... </td>
+<td>
+<a class="" href="{{ path('blog-show', {'id':item.getId() }) }}"><i class="fas fa-eye"></i></a> 
+<a class="" href="{{ path('blog-edit', {'id':item.getId() }) }}"><i class="fas fa-edit"></i></a> 
+<a class="" href="{{ path('blog-delete', {'id':item.getId() }) }}"><i class="fas fa-trash-alt"></i></a> 
+</td>
+</tr>
+{% endfor %}
+</table>
+<div class="navigation">
+    {{ knp_pagination_render(article) }}
+</div>
+
+{% endif %}
+
+
+{% endblock %}

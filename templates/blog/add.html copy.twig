@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<h1>Creation d'un article !</h1>
+{#{{ form_start(form) }} #}
+<form method="post" action="" >
+<div class="form-group">
+{{ form_row(form.title,{'attr':{'placeholder':"veuillez saisir le titre ..."}})}}
+</div>
+<div class="form-group">
+{{ form_row(form.content,{'attr':{'placeholder':"Veuillez saisir le corps de l'article ..."}})}}
+</div>
+<div class="form-group">
+{{ form_row(form.image)}}
+</div>
+
+
+<div class="form-group">
+{{ form_row(form.categoriesList)}}
+</div>
+
+
+
+<div class="form-group"><br/>
+
+<button type="submit" class="btn btn-primary">
+{% if editMode %}
+Enregister les modifications !
+{% else %}
+Ajouter un article !
+{% endif %}
+</button>
+</form>
+</div>
+{#{{ form_end(form)  {#{{ form_end(form) }}}}
+{{ form(form) }}#}
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<style>
+.custom-file-label { opacity: 0; }
+.custom-file-input { opacity: 1; }
+
+
+</style>
+<h1>Edition d'un article !</h1>
+
+{% for message in app.flashes('success') %}
+    <div class="alert alert-success" role="alert">
+        {{ message }}
+    </div>
+{% endfor %}
+
+<!--<form method="post" action="" >---->
+
+<div class="row" style="padding-top:40px">
+
+<div class="col-md-4">
+ 
+   <img src="{{asset('uploads/images/')}}{{article.image}}" class="card-img-top" alt="...">
+
+{{ form_start(formImage) }}
+
+<div class="form-group">
+{{ form_row(formImage.image)}}
+</div>
+
+<div class="form-group"><br/>
+
+<button type="submit" class="btn btn-primary" name="enregistrer-creer">
+Enregister les modifications !
+</button>
+
+</div>
+{{ form_end(formImage) }}
+ </div>
+
+<div class="col-md-8">
+{{ form_start(form) }} 
+<div class="form-group">
+{{ form_row(form.title,{'attr':{'placeholder':"Veuillez saisir le titre ..."}})}}
+</div>
+<div class="form-group">
+{{ form_row(form.content,{'attr':{'placeholder':"Veuillez saisir le corps de l'article ...","rows":"8"}})}}
+</div>
+
+<div class="form-group">
+{{ form_row(form.categoriesList)}}
+</div>
+
+<div class="form-group">
+{{ form_row(form.isPublished)}}
+</div>
+
+<div class="form-group"><br/>
+
+<button type="submit" class="btn btn-primary" name="enregistrer-creer">
+Enregister les modifications !
+</button>
+
+
+
+<!---</form>-->
+</div>
+{{ form_end(form) }}
+{#{{ form_end(form) }}}}
+{{ form(form) }}#}
+</div>
+ </div>
+{% endblock %}
+ 

@@ -1,0 +1,68 @@
+ {% extends 'base.html.twig' %}
+{% block body %}
+
+ <div class="row" style="padding-top:40px;">
+ <div class="col-md-4">
+ 
+   <img src={{asset('uploads/images/')}}{{article.getImage()}}  class="card-img-top" alt="...">
+
+ </div>
+ <div class="col-md-8">
+ <h5>{{ article.getTitle() }}</h5> 
+ {% for message in app.flashes('success') %}
+    <div class="alert alert-success" role="alert">
+        {{ message }}
+    </div>
+{% endfor %}
+<br/>
+ Publié le: {{ article.getDatePub()|date('d/M/Y H:i') }} 
+ <br>
+ Visible : {% if (article.getIsPublished()) %} <span class="badge bg-success">Oui</span> {% else %}
+<span class="badge bg-danger">Non</span> {% endif %} 
+ <br/>
+
+<hr>
+<ul>
+Catégories: {% for cat in article.getCategoriesList() %}
+<li>{{cat.description}}</li>
+{% endfor%}
+</ul>
+ <hr>
+ {{ article.getContent() }} 
+
+ </div>
+</div>
+
+<hr>
+<h6>Liste des commentaires</h6>
+{% for item in article.getComments() %}
+{{item.datePub|date("d-M-Y H:i")}} <b>{{item.author}}</b>:{{item.content}}
+<br>
+{% endfor %}
+
+{% if (app.user)  %}
+<hr>
+{{ form_start(form) }} 
+<div class="form-group">
+{{ form_row(form.author)}}
+</div>
+<div class="form-group">
+{{ form_row(form.content)}}
+</div>
+<div class="form-group">
+
+
+<button type="submit" class="btn btn-primary" name="enregistrer">
+Enregister  !
+</button>
+
+</div>
+{{ form_end(form) }}
+{% else   %}
+<p>Vous devez se connecter pour commenter cet article!</p>
+<a class="btn btn-success" href="{{ path('app_login') }}">Se connecter</a>
+<a class="btn btn-primary" href="{{ path('app_register') }}">S'inscrire</a>
+{% endif   %}
+
+
+ {% endblock %}

@@ -1,0 +1,21 @@
+
+ {% extends 'base.html.twig' %}
+{% block body %}
+<!----/*width="40px" height="40px"-->
+
+<div class="row" style="padding-top: 20px;">
+{% for item in article %}
+<div class="col-md-4" style="margin-bottom: 20px;">
+<div class="card bg-light" style="width: 18rem;">
+  <img src={{asset('uploads/images/')}}{{item.getImage()}}  class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">{{ item.getTitle() }}</h5>
+    <h6>Publié le {{ item.getDatePub() |date('d/M/Y H:i') }} </h6>
+    <p class="card-text"> {{ item.getContent()|slice(0, 50)  }}</p>
+    <a  href="{{ path('blog-show', {'id':item.getId() }) }}" class="btn btn-primary">Lire la suite</a>
+  </div>
+</div>
+</div>
+{% endfor %}
+</div>
+{% endblock %}
