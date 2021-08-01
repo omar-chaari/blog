@@ -2,7 +2,6 @@
 Simple Symfony blog Application with CRUD (Create, Read, Update, Delete) functions.
 # Installation
 
-Download or Clone this repository
 - Download or Clone this repository
 ```
 git clone https://github.com/omar-chaari/blog.git
@@ -15,7 +14,19 @@ composer install
 php bin/console make:migration
 php bin/console doctrine:migrations:migrate
 ```
+- Add administrator: run this sql query 
+
+```
+INSERT INTO `user` (`id`, `email`, `roles`, `password`) VALUES
+(1, 'admin@admin.com', '[\"ROLE_ADMIN\"]', '$2y$13$7YdqvPd./AmWS1MnBVD7seKIMDFDjI4GVgyhsQWrPpxgXkEWWAI5O');
+```
 - Launch web server
 ```
 symfony serve:start
+```
+- Connect to the application using  ```/login``` route
+```
+Credentials:
+Email:admin@admin.com
+Password:123456
 ```
